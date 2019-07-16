@@ -1,0 +1,18 @@
+{
+  "name": "greatdayatt",
+  "version": "1.1.0",
+  "description": "this is plugin for attendance greatday",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "camera",
+    "geolocation",
+    "permission",
+    "ionic",
+    "cordova"
+  ],
+  "author": "tomy krisna",
+  "license": "ISC"
+}
