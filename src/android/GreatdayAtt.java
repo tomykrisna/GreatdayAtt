@@ -16,14 +16,14 @@ public class GreatdayAtt extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("add")) {
+        if ("add".equals(action)) {
             this.test(args, callbackContext);
             return true;
 
             //            String message = args.getString(0);
 //            this.coolMethod(message, callbackContext);
 //            return true;
-        }else if (action.equals("test") ){
+        }else if ("test".equals(action) ){
             this.test(args, callbackContext);
             return true;
         }
