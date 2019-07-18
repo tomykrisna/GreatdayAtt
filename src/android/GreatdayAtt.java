@@ -1,6 +1,4 @@
-package cordova
-
--plugin-greatdayatt;
+package cordova.plugin.greatdayatt;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
