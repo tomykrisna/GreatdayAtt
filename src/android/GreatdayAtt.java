@@ -1,10 +1,16 @@
 package cordova.plugin.greatdayatt;
 
-mport org.apache.cordova.*;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Hello extends CordovaPlugin {
+/**
+ * This class echoes a string called from JavaScript.
+ */
+public class GreatdayAtt extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
@@ -23,4 +29,3 @@ public class Hello extends CordovaPlugin {
 
         }
     }
-}
