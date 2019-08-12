@@ -9,11 +9,16 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="GreatdayAtt">
-                <param name="android-package" value="cordova.plugin.greatdayatt.GreatdayAtt"/>
+                <param name="android-package" value="cordova.plugin.greatdayatt"/>
             </feature>
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:launchMode="singleTop" android:name="cordova.plugin.greatdayatt.AttActivity"></activity>
+        </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"/>
-        <source-file src="src/android/GreatdayAtt.java" target-dir="src/cordova/plugin/greatdayatt/GreatdayAtt"/>
+        <source-file src="src/android/GreatdayAtt.java" target-dir="src/cordova/plugin/greatdayatt/"/>
+        <source-file src="src/android/AttActivity.java" target-dir="src/cordova/plugin/greatdayatt/"/>
+        <source-file src="src/android/activity_att.xml" target-dir="res/layout"/>
     </platform>
     <platform name="ios">
         <config-file parent="/*" target="config.xml">

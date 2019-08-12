@@ -1,69 +1,57 @@
 package cordova.plugin.greatdayatt;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-
-import org.json.JSONArray;
+import org.apache.cordova.PluginResult;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * This class echoes a string called from JavaScript.
  */
 public class GreatdayAtt extends CordovaPlugin {
+    public CallbackContext context;
 
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, String args, final CallbackContext callbackContext) throws JSONException {
+        this.context = callbackContext;
         if (action.equals("add")) {
-            this.test(args, callbackContext);
-            return true;
 
-            //            String message = args.getString(0);
-//            this.coolMethod(message, callbackContext);
-//            return true;
+            Context context = cordova.getActivity().getApplicationContext();
+            this.openNewActivity(context, args);
+            return true;
         } else if (action.equals("test")) {
-            this.test(args, callbackContext);
             return true;
         }
         return false;
     }
 
-//    private void coolMethod(String message, CallbackContext callbackContext) {
-//        if (message != null && message.length() > 0) {
-//            callbackContext.success(message);
-//        } else {
-//            callbackContext.error("Expected one non-empty string argument.");
-//        }
-//    }
-
-    private void add(JSONArray args, CallbackContext callback) {
-        if (args != null) {
-            try {
-//                int p1 = Integer.parse(args.getJSONObject(0).getString("param1"));
-//                int p2 = Integer.parse(args.getJSONObject(0).getString("param2"));
-                int p1 = 1;
-                int p2 = 4;
-                callback.success("" + (p1 + p2));
-            } catch (Exception ex) {
-                callback.error("something wrong" + ex);
-            }
-        } else {
-            callback.error("not value");
-        }
+    private void openNewActivity(Context context, String args) {
+        Log.v("args log ", "ssss" + args);
+        String value = "hallo haahha";
+        Intent intent = new Intent(context, cordova.plugin.greatdayatt.AttActivity.class);
+        intent.putExtra("value", args);
+        cordova.startActivityForResult((CordovaPlugin) this, intent, 0);
     }
 
-    private void test(JSONArray args, CallbackContext callback) {
-        if (args != null) {
-            try {
-                int p1 = 1;
-                int p2 = 2;
-                callback.success("" + (p1 + p2));
-            } catch (Exception ex) {
-                callback.error("something wrong" + ex);
-            }
-        } else {
-            callback.error("not value");
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        if (resultCode == cordova.getActivity().RESULT_OK) {
+            Bundle extras = data.getExtras();// Get data sent by the Intent
+            String information = extras.getString("result");
+            Log.d("on Result ", information);
+            PluginResult result = new PluginResult(PluginResult.Status.OK, information);
+            this.context.sendPluginResult(result);
+        } else if (resultCode == cordova.getActivity().RESULT_CANCELED) {
+            PluginResult resultado = new PluginResult(PluginResult.Status.OK, "canceled action, process this in javascript");
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }
 
